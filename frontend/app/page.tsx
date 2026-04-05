@@ -4,6 +4,10 @@ import { AlertFeed } from "@/components/dashboard/AlertFeed";
 import { StockoutPrediction } from "@/components/dashboard/StockoutPrediction";
 import { AiInsightCard } from "@/components/dashboard/AiInsightCard";
 import { apiGet } from "@/lib/api";
+import {
+  offlineDashboardPayload,
+  type DashboardPayload,
+} from "@/lib/dashboard-fallback";
 import { aisleColumnsFromHeatmap } from "@/lib/heatmap";
 import { mapAlert, mapDepletion } from "@/lib/mappers";
 import type {
@@ -15,42 +19,16 @@ import type {
   StoreKpisApi,
 } from "@/lib/types";
 
-async function loadDashboard(storeId: number) {
-  const kpisPath = `/stores/${storeId}/kpis`;
-  const heatPath = `/stores/${storeId}/heatmap`;
-  const alertsPath = `/alerts?resolved=false&store_id=${storeId}&limit=12`;
-  const depletionPath = `/analytics/depletion?store_id=${storeId}`;
-  const briefPath = `/insights/daily-brief?store_id=${storeId}`;
-
-  let kpis: StoreKpisApi;
-  let heatmap: HeatmapApi;
-  let alertsRaw: AlertApi[];
-  let depletionRaw: DepletionApi[];
-  let brief: DailyBriefApi;
-
-  try {
-    [kpis, heatmap, alertsRaw, depletionRaw, brief] = await Promise.all([
-      apiGet<StoreKpisApi>(kpisPath),
-      apiGet<HeatmapApi>(heatPath),
-      apiGet<AlertApi[]>(alertsPath),
-      apiGet<DepletionApi[]>(depletionPath),
-      apiGet<DailyBriefApi>(briefPath),
-    ]);
-  } catch {
-    const fallback = 1;
-    [kpis, heatmap, alertsRaw, depletionRaw, brief] = await Promise.all([
-      apiGet<StoreKpisApi>(`/stores/${fallback}/kpis`),
-      apiGet<HeatmapApi>(`/stores/${fallback}/heatmap`),
-      apiGet<AlertApi[]>(`/alerts?resolved=false&store_id=${fallback}&limit=12`),
-      apiGet<DepletionApi[]>(`/analytics/depletion?store_id=${fallback}`),
-      apiGet<DailyBriefApi>(`/insights/daily-brief?store_id=${fallback}`),
-    ]);
-  }
-
+function buildDashboardFromApi(
+  kpis: StoreKpisApi,
+  heatmap: HeatmapApi,
+  alertsRaw: AlertApi[],
+  depletionRaw: DepletionApi[],
+  brief: DailyBriefApi,
+): DashboardPayload {
   const columns = aisleColumnsFromHeatmap(heatmap);
   const alerts = alertsRaw.slice(0, 8).map(mapAlert);
   const depletion = depletionRaw.slice(0, 5).map(mapDepletion);
-
   return {
     kpis,
     heatmap,
@@ -59,7 +37,48 @@ async function loadDashboard(storeId: number) {
     depletion,
     brief,
     effectiveStoreId: kpis.store_id,
+    apiOffline: false,
   };
+}
+
+async function fetchDashboardBundle(storeId: number) {
+  return Promise.all([
+    apiGet<StoreKpisApi>(`/stores/${storeId}/kpis`),
+    apiGet<HeatmapApi>(`/stores/${storeId}/heatmap`),
+    apiGet<AlertApi[]>(
+      `/alerts?resolved=false&store_id=${storeId}&limit=12`,
+    ),
+    apiGet<DepletionApi[]>(`/analytics/depletion?store_id=${storeId}`),
+    apiGet<DailyBriefApi>(`/insights/daily-brief?store_id=${storeId}`),
+  ]);
+}
+
+async function loadDashboard(storeId: number): Promise<DashboardPayload> {
+  try {
+    const [kpis, heatmap, alertsRaw, depletionRaw, brief] =
+      await fetchDashboardBundle(storeId);
+    return buildDashboardFromApi(
+      kpis,
+      heatmap,
+      alertsRaw,
+      depletionRaw,
+      brief,
+    );
+  } catch {
+    try {
+      const [kpis, heatmap, alertsRaw, depletionRaw, brief] =
+        await fetchDashboardBundle(1);
+      return buildDashboardFromApi(
+        kpis,
+        heatmap,
+        alertsRaw,
+        depletionRaw,
+        brief,
+      );
+    } catch {
+      return offlineDashboardPayload(storeId);
+    }
+  }
 }
 
 export default async function HomePage({
@@ -72,11 +91,30 @@ export default async function HomePage({
   const raw = parseInt(searchParams.store || String(defaultId), 10);
   const storeId = Number.isFinite(raw) && raw > 0 ? raw : defaultId;
 
-  const { kpis, columns, alerts, depletion, brief, effectiveStoreId } =
-    await loadDashboard(storeId);
+  const {
+    kpis,
+    columns,
+    alerts,
+    depletion,
+    brief,
+    effectiveStoreId,
+    apiOffline,
+  } = await loadDashboard(storeId);
 
   return (
     <div className="mx-auto max-w-7xl space-y-8">
+      {apiOffline ? (
+        <div
+          className="rounded-lg border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm text-amber-100/95"
+          role="status"
+        >
+          Backend not reachable from this deployment. Set{" "}
+          <code className="rounded bg-[var(--rp-panel)] px-1 py-0.5 text-xs">
+            NEXT_PUBLIC_API_URL
+          </code>{" "}
+          in Vercel (Production) to your API URL, redeploy, then reload.
+        </div>
+      ) : null}
       <div>
         <h1 className="text-xl font-semibold tracking-tight text-[var(--rp-fg)]">
           Dashboard
