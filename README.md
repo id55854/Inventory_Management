@@ -30,7 +30,7 @@ This repo is a monorepo. Only the **Next.js** app in `frontend/` is deployed to 
 ### Option A — Import from GitHub (recommended for CI)
 
 1. [Vercel](https://vercel.com) → **Add New Project** → import **id55854/Inventory_Management**.
-2. **Root Directory:** `frontend` (recommended). The repo also includes a root `package.json` and `vercel.json` so builds can succeed if Root Directory is left blank; setting **`frontend`** is still the clearest setup.
+2. **Root Directory:** set to **`frontend`**. That is the supported way to deploy this monorepo: Vercel then runs install/build in `frontend/` and finds `.next` in the right place. If you leave Root Directory blank, the repo falls back to a root `vercel.json` that builds in `frontend/` and copies `.next` to the repo root for the Next.js builder.
 3. **Environment variables:** `NEXT_PUBLIC_API_URL` = your public API origin (no trailing slash), e.g. `https://your-api.onrender.com`.
 
 If the build fails with **`Could not read package.json`** at the repo root, open **Project → Settings → General → Root Directory**, set it to **`frontend`**, save, and redeploy.

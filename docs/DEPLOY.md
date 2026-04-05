@@ -105,9 +105,18 @@ If you use Render **Blueprint**, you can commit `render.yaml` at the repo root a
 
 ---
 
-## 7. Vercel: `package.json` not found at repo root
+## 7. Vercel monorepo: root vs `frontend/`
+
+### `package.json` not found at repo root
 
 If the build log shows **`Could not read package.json`** under `/vercel/path0/package.json`, the project was building from the **monorepo root** without seeing the Next app.
 
 1. **Preferred:** Vercel → **Project** → **Settings** → **General** → **Root Directory** → **`frontend`** → save → **Redeploy**.
-2. The repo also ships a root **`package.json`** and **`vercel.json`** so install/build run inside **`frontend/`** when Root Directory is left blank; after pulling latest `main`, trigger a new deploy.
+2. The repo also ships a root **`package.json`** and **`vercel.json`** so install/build run inside **`frontend/`** when Root Directory is left blank.
+
+### `routes-manifest.json` could not be found
+
+If **`next build` succeeds** but deployment fails with **`.next/routes-manifest.json` missing** at the repo root, Vercel’s Next.js step is looking for **`.next`** next to the Git root while the build wrote **`frontend/.next`**.
+
+1. **Preferred:** set **Root Directory** to **`frontend`** (same as above). Then `.next` is under the project root and you do not need the copy step.
+2. If Root Directory stays blank, the root **`vercel.json`** runs a post-build copy of **`frontend/.next`** → **`.next`** at the repo root so the builder can find `routes-manifest.json`.
