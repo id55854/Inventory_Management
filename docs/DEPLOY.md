@@ -105,18 +105,14 @@ If you use Render **Blueprint**, you can commit `render.yaml` at the repo root a
 
 ---
 
-## 7. Vercel monorepo: root vs `frontend/`
+## 7. Vercel monorepo: use Root Directory `frontend/`
 
-### `package.json` not found at repo root
+The Next.js app is in **`frontend/`**. In Vercel → **Project** → **Settings** → **General**, set **Root Directory** to **`frontend`** and save.
 
-If the build log shows **`Could not read package.json`** under `/vercel/path0/package.json`, the project was building from the **monorepo root** without seeing the Next app.
+If Root Directory is **blank**, installs/builds run from the repo root, which leads to missing **`package.json`**, missing **`routes-manifest.json`**, or **500** responses after a “successful” build (wrong traced output). **Always** point the project at **`frontend/`**.
 
-1. **Preferred:** Vercel → **Project** → **Settings** → **General** → **Root Directory** → **`frontend`** → save → **Redeploy**.
-2. The repo also ships a root **`package.json`** and **`vercel.json`** so install/build run inside **`frontend/`** when Root Directory is left blank.
+### `HTTP 500` on every page after deploy
 
-### `routes-manifest.json` could not be found
-
-If **`next build` succeeds** but deployment fails with **`.next/routes-manifest.json` missing** at the repo root, Vercel’s Next.js step is looking for **`.next`** next to the Git root while the build wrote **`frontend/.next`**.
-
-1. **Preferred:** set **Root Directory** to **`frontend`** (same as above). Then `.next` is under the project root and you do not need the copy step.
-2. If Root Directory stays blank, the root **`vercel.json`** runs a post-build copy of **`frontend/.next`** → **`.next`** at the repo root so the builder can find `routes-manifest.json`.
+1. Confirm **Root Directory** is **`frontend`** (not the repository root).
+2. Set **`NEXT_PUBLIC_API_URL`** to your live API (no trailing slash) and redeploy.
+3. If it persists, open **Deployments → your deployment → Functions** (or **Logs**) and check the serverless error for that request.

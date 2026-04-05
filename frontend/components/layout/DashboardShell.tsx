@@ -1,11 +1,12 @@
 "use client";
 
+import { Suspense } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
 import type { StoreApiRow } from "@/lib/types";
 
-export function DashboardShell({
+function DashboardShellInner({
   initialStores,
   children,
 }: {
@@ -39,5 +40,25 @@ export function DashboardShell({
         <main className="flex-1 overflow-auto p-4 md:p-6">{children}</main>
       </div>
     </div>
+  );
+}
+
+export function DashboardShell({
+  initialStores,
+  children,
+}: {
+  initialStores: StoreApiRow[];
+  children: React.ReactNode;
+}) {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-[var(--rp-bg)] text-[var(--rp-muted)]">
+          Loading…
+        </div>
+      }
+    >
+      <DashboardShellInner initialStores={initialStores}>{children}</DashboardShellInner>
+    </Suspense>
   );
 }

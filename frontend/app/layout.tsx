@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import "./globals.css";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { apiGet } from "@/lib/api";
@@ -24,15 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className="min-h-screen antialiased">
-        <Suspense
-          fallback={
-            <div className="flex min-h-screen items-center justify-center bg-[var(--rp-bg)] text-[var(--rp-muted)]">
-              Loading…
-            </div>
-          }
-        >
-          <DashboardShell initialStores={stores}>{children}</DashboardShell>
-        </Suspense>
+        <DashboardShell initialStores={stores}>{children}</DashboardShell>
       </body>
     </html>
   );
