@@ -1,0 +1,200 @@
+[
+  {
+    "name": "Dukat Mlijeko 1L 2.8%",
+    "brand": "Dukat",
+    "category": "dairy",
+    "price": 1.19,
+    "shelf_life": 10,
+    "avg_daily_sales": 45,
+    "perishable": true
+  },
+  {
+    "name": "Vindija 'z bregov Jogurt 500g",
+    "brand": "Vindija",
+    "category": "dairy",
+    "price": 0.89,
+    "shelf_life": 14,
+    "avg_daily_sales": 30,
+    "perishable": true
+  },
+  {
+    "name": "Dukat Svježi Sir 500g",
+    "brand": "Dukat",
+    "category": "dairy",
+    "price": 2.49,
+    "shelf_life": 7,
+    "avg_daily_sales": 15,
+    "perishable": true
+  },
+  {
+    "name": "Meggle Maslac 250g",
+    "brand": "Meggle",
+    "category": "dairy",
+    "price": 2.99,
+    "shelf_life": 30,
+    "avg_daily_sales": 12,
+    "perishable": true
+  },
+  {
+    "name": "Président Camembert 250g",
+    "brand": "Président",
+    "category": "dairy",
+    "price": 3.49,
+    "shelf_life": 21,
+    "avg_daily_sales": 8,
+    "perishable": true
+  },
+  {
+    "name": "Mlinar Kruh Bijeli 500g",
+    "brand": "Mlinar",
+    "category": "bakery",
+    "price": 1.29,
+    "shelf_life": 3,
+    "avg_daily_sales": 60,
+    "perishable": true
+  },
+  {
+    "name": "Pekara Dubravica Pecivo 6x",
+    "brand": "Dubravica",
+    "category": "bakery",
+    "price": 1.99,
+    "shelf_life": 2,
+    "avg_daily_sales": 35,
+    "perishable": true
+  },
+  {
+    "name": "Jana Voda 1.5L",
+    "brand": "Jana",
+    "category": "beverages",
+    "price": 0.59,
+    "shelf_life": 365,
+    "avg_daily_sales": 80,
+    "perishable": false
+  },
+  {
+    "name": "Coca-Cola 2L",
+    "brand": "Coca-Cola",
+    "category": "beverages",
+    "price": 1.89,
+    "shelf_life": 180,
+    "avg_daily_sales": 50,
+    "perishable": false
+  },
+  {
+    "name": "Cedevita Naranča 900g",
+    "brand": "Cedevita",
+    "category": "beverages",
+    "price": 4.99,
+    "shelf_life": 365,
+    "avg_daily_sales": 15,
+    "perishable": false
+  },
+  {
+    "name": "Ožujsko Pivo 0.5L",
+    "brand": "Ožujsko",
+    "category": "alcohol",
+    "price": 1.19,
+    "shelf_life": 180,
+    "avg_daily_sales": 40,
+    "perishable": false
+  },
+  {
+    "name": "Franck Čips Paprika 150g",
+    "brand": "Franck",
+    "category": "snacks",
+    "price": 1.79,
+    "shelf_life": 180,
+    "avg_daily_sales": 25,
+    "perishable": false
+  },
+  {
+    "name": "Kraš Napolitanke 420g",
+    "brand": "Kraš",
+    "category": "snacks",
+    "price": 3.29,
+    "shelf_life": 365,
+    "avg_daily_sales": 20,
+    "perishable": false
+  },
+  {
+    "name": "Dorina Čokolada Mliječna 80g",
+    "brand": "Kraš",
+    "category": "snacks",
+    "price": 1.29,
+    "shelf_life": 365,
+    "avg_daily_sales": 35,
+    "perishable": false
+  },
+  {
+    "name": "Kikiriški Bamba 150g",
+    "brand": "Štark",
+    "category": "snacks",
+    "price": 1.49,
+    "shelf_life": 180,
+    "avg_daily_sales": 18,
+    "perishable": false
+  },
+  {
+    "name": "Jabuke Idared 1kg",
+    "brand": "Domestic",
+    "category": "fresh_produce",
+    "price": 1.99,
+    "shelf_life": 14,
+    "avg_daily_sales": 25,
+    "perishable": true
+  },
+  {
+    "name": "Banane 1kg",
+    "brand": "Import",
+    "category": "fresh_produce",
+    "price": 1.49,
+    "shelf_life": 5,
+    "avg_daily_sales": 40,
+    "perishable": true
+  },
+  {
+    "name": "Rajčica Cherry 250g",
+    "brand": "Domestic",
+    "category": "fresh_produce",
+    "price": 2.49,
+    "shelf_life": 5,
+    "avg_daily_sales": 20,
+    "perishable": true
+  },
+  {
+    "name": "PIK Pileća Prsa 500g",
+    "brand": "PIK Vrbovec",
+    "category": "meat",
+    "price": 4.99,
+    "shelf_life": 5,
+    "avg_daily_sales": 22,
+    "perishable": true
+  },
+  {
+    "name": "Gavrilović Kulen 200g",
+    "brand": "Gavrilović",
+    "category": "meat",
+    "price": 5.99,
+    "shelf_life": 30,
+    "avg_daily_sales": 10,
+    "perishable": true
+  },
+  {
+    "name": "Saponia Nila Deterdžent 3L",
+    "brand": "Saponia",
+    "category": "household",
+    "price": 6.99,
+    "shelf_life": 730,
+    "avg_daily_sales": 8,
+    "perishable": false
+  },
+  {
+    "name": "Labud Toaletni Papir 10x",
+    "brand": "Labud",
+    "category": "household",
+    "price": 4.49,
+    "shelf_life": 730,
+    "avg_daily_sales": 15,
+    "perishable": false
+  }
+]

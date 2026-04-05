@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --rp-bg: #0c0e12;
+  --rp-fg: #e8eaef;
+  --rp-muted: #8b92a3;
+  --rp-border: #252a35;
+  --rp-panel: #141821;
+  --rp-sidebar: #0f1218;
+  --rp-header: #0c0e12;
+  --rp-accent: #22d3ee;
+}
+
+body {
+  color: var(--rp-fg);
+  background: var(--rp-bg);
+}

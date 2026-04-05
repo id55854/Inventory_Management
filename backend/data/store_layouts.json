@@ -1,0 +1,96 @@
+[
+  {
+    "name": "Konzum Ilica 231",
+    "chain": "Konzum",
+    "city": "Zagreb",
+    "latitude": 45.8131,
+    "longitude": 15.954,
+    "aisle_count": 8,
+    "aisle_categories": [
+      "dairy",
+      "bakery",
+      "beverages",
+      "snacks",
+      "fresh_produce",
+      "meat",
+      "frozen",
+      "household"
+    ]
+  },
+  {
+    "name": "Konzum Avenue Mall",
+    "chain": "Konzum",
+    "city": "Zagreb",
+    "latitude": 45.7775,
+    "longitude": 15.925,
+    "aisle_count": 12,
+    "aisle_categories": [
+      "dairy",
+      "bakery",
+      "beverages",
+      "snacks",
+      "fresh_produce",
+      "meat",
+      "frozen",
+      "household",
+      "personal_care",
+      "alcohol"
+    ]
+  },
+  {
+    "name": "Spar Heinzelova",
+    "chain": "Spar",
+    "city": "Zagreb",
+    "latitude": 45.8089,
+    "longitude": 16.0025,
+    "aisle_count": 10,
+    "aisle_categories": [
+      "dairy",
+      "bakery",
+      "beverages",
+      "snacks",
+      "fresh_produce",
+      "meat",
+      "frozen",
+      "household",
+      "personal_care",
+      "alcohol"
+    ]
+  },
+  {
+    "name": "Plodine City Center One",
+    "chain": "Plodine",
+    "city": "Zagreb",
+    "latitude": 45.8005,
+    "longitude": 15.9076,
+    "aisle_count": 9,
+    "aisle_categories": [
+      "dairy",
+      "bakery",
+      "beverages",
+      "snacks",
+      "fresh_produce",
+      "meat",
+      "frozen",
+      "household",
+      "personal_care"
+    ]
+  },
+  {
+    "name": "Tommy Split Joker",
+    "chain": "Tommy",
+    "city": "Split",
+    "latitude": 43.5147,
+    "longitude": 16.4435,
+    "aisle_count": 7,
+    "aisle_categories": [
+      "dairy",
+      "bakery",
+      "beverages",
+      "snacks",
+      "fresh_produce",
+      "meat",
+      "frozen"
+    ]
+  }
+]
