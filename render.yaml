@@ -1,0 +1,16 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# After connect: set GEMINI_API_KEY in the Render dashboard (mark secret).
+
+services:
+  - type: web
+    name: retailpulse-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash

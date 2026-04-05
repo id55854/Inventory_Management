@@ -42,3 +42,6 @@ A production deployment was created from this machine; stable alias:
 Set `NEXT_PUBLIC_API_URL` in the Vercel project **Settings → Environment Variables** so the dashboard can reach your API.
 
 The FastAPI backend is **not** built by this Vercel project; deploy `backend/` separately or use Docker.
+
+**Step-by-step (API + Vercel + env vars):** see **[docs/DEPLOY.md](docs/DEPLOY.md)**.  
+Quick backend option: connect the repo to [Render](https://render.com) and use **`render.yaml`** at the repo root (Dockerfile in `backend/`), then set **`GEMINI_API_KEY`** in Render’s dashboard.
