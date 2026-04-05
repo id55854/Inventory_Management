@@ -102,3 +102,12 @@ If you use Render **Blueprint**, you can commit `render.yaml` at the repo root a
 | API | `http://localhost:8000` | `https://your-api-host` |
 | Frontend env | Optional `.env.local`: `NEXT_PUBLIC_API_URL=http://localhost:8000` | Vercel: `NEXT_PUBLIC_API_URL=https://your-api-host` |
 | Gemini | `backend/.env` | Host env vars on the API service |
+
+---
+
+## 7. Vercel: `package.json` not found at repo root
+
+If the build log shows **`Could not read package.json`** under `/vercel/path0/package.json`, the project was building from the **monorepo root** without seeing the Next app.
+
+1. **Preferred:** Vercel → **Project** → **Settings** → **General** → **Root Directory** → **`frontend`** → save → **Redeploy**.
+2. The repo also ships a root **`package.json`** and **`vercel.json`** so install/build run inside **`frontend/`** when Root Directory is left blank; after pulling latest `main`, trigger a new deploy.
